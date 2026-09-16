@@ -19,7 +19,7 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          p = Path('css/style.css')
+          p = Path('index.html')
           s = p.read_text(encoding='utf-8')
           old = ".footer-brand .brand-name{font-size:1.05rem}"
           new = ".footer-brand .brand-name{display:none}"
@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add css/style.css
+          git add index.html
           git diff --cached --quiet && exit 0
           git commit -m "Set footer brand logo only"
           git push
