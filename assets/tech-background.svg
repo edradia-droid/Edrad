@@ -28,5 +28,6 @@
 </g>
 <g fill="none" stroke="#d9ff57" stroke-opacity=".18" stroke-width="2"><path d="M130 285h185M130 310h125M130 335h75"/><path d="M1100 220h210M1100 245h150M1100 270h180"/><path d="M1090 710h180M1090 735h125M1090 760h155"/></g>
 <g fill="none" stroke="#d9ff57" stroke-opacity=".10" stroke-width="1.5"><path d="M40 450C230 340 330 520 500 400S760 300 940 430 1190 340 1400 460"/><path d="M20 600C230 500 380 650 560 560S850 500 1020 610 1230 530 1420 600"/><path d="M365 305L442 220M598 220L720 300M900 465L1070 300M860 675L1050 730"/><circle cx="500" cy="430" r="120"/><circle cx="1050" cy="430" r="130"/></g>
-<g fill="#d9ff57" fill-opacity=".15" font-family="monospace" font-size="22"><text x="335" y="165">&lt;div /&gt;</text><text x="1010" y="570">{ API }</text><text x="70" y="735">sudo_</text><text x="970" y="120">0xEDRAD</text><text x="610" y="410">DATABASE</text></g>
+<!-- SMALL CODE GLYPHS — BOLDER FOR VISIBILITY -->
+<g fill="#d9ff57" fill-opacity=".23" font-family="monospace" font-size="22" font-weight="700" letter-spacing=".5"><text x="335" y="165">&lt;div /&gt;</text><text x="1010" y="570">{ API }</text><text x="70" y="735">sudo_</text><text x="970" y="120">0xEDRAD</text><text x="610" y="410">DATABASE</text></g>
 </svg>
