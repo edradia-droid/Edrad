@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+<defs>
+<pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#d9ff57" stroke-opacity=".075" stroke-width="1"/></pattern>
+<radialGradient id="glow" cx="50%" cy="45%" r="65%"><stop offset="0" stop-color="#d9ff57" stop-opacity=".055"/><stop offset=".55" stop-color="#d9ff57" stop-opacity=".012"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1440" height="900" fill="url(#grid)"/><rect width="1440" height="900" fill="url(#glow)"/>
+<g fill="#e8e8e8" fill-opacity=".075" font-family="monospace" font-size="34" font-weight="700" letter-spacing="2">
+<text x="90" y="120" transform="rotate(-8 90 120)">HTML5</text><text x="410" y="90" transform="rotate(7 410 90)">CSS3</text><text x="760" y="150" transform="rotate(-5 760 150)">JAVASCRIPT</text><text x="1060" y="82" transform="rotate(8 1060 82)">PYTHON</text><text x="1240" y="260" transform="rotate(-7 1240 260)">REACT</text><text x="250" y="390" transform="rotate(6 250 390)">NODE.JS</text><text x="600" y="360" transform="rotate(-5 600 360)">GITHUB</text><text x="930" y="410" transform="rotate(8 930 410)">API</text><text x="1160" y="510" transform="rotate(-6 1160 510)">SQL</text><text x="180" y="620" transform="rotate(-7 180 620)">SUPABASE</text><text x="500" y="590" transform="rotate(6 500 590)">JSON</text><text x="850" y="650" transform="rotate(-8 850 650)">GIT</text><text x="1040" y="720" transform="rotate(5 1040 720)">DATABASE</text><text x="1320" y="640" transform="rotate(-6 1320 640)">CLOUD</text><text x="720" y="790" transform="rotate(5 720 790)">&lt;/&gt;</text><text x="70" y="820" transform="rotate(-5 70 820)">01</text><text x="390" y="760" transform="rotate(7 390 760)">{ }</text><text x="970" y="860" transform="rotate(-5 970 860)">[ ]</text>
+</g>
+<g fill="none" stroke="#d9ff57" stroke-opacity=".045" stroke-width="1"><path d="M80 250 C250 160 320 300 470 220 S760 170 900 260 1170 180 1370 290"/><path d="M30 540 C220 450 350 570 520 500 S820 430 990 550 1210 470 1410 530"/><circle cx="260" cy="250" r="90"/><circle cx="1120" cy="350" r="120"/><circle cx="730" cy="610" r="105"/></g>
+</svg>
