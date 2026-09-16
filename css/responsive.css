@@ -11,3 +11,12 @@ main{position:relative;z-index:1!important;background:transparent!important}
 .work,.services,.journey{background-image:linear-gradient(rgba(10,10,11,.10),rgba(10,10,11,.10))!important}
 .contact{background-image:linear-gradient(rgba(17,17,19,.25),rgba(17,17,19,.25))!important}
 @media(max-width:700px){body:before{background-size:auto 900px!important;opacity:.52!important}body:after{background:linear-gradient(180deg,rgba(5,5,6,.24),rgba(5,5,6,.42))!important}}
+
+/* EDRAD MAIN CONTENT — stronger small text for readability */
+main p{font-weight:500!important;color:#b4b2ad!important}
+main .hero-copy{font-weight:500!important}
+main .about-grid p,.services-intro p,.service-list p,.timeline p,.contact>p:not(.section-label),.project-info>p:not(.project-type){font-weight:500!important;color:#b4b2ad!important}
+main .section-label,main .eyebrow,main .project-type{font-weight:600!important;color:#b4b2ad!important}
+main .skill-grid p{font-weight:500!important;color:#b4b2ad!important}
+main .project-highlights span{font-weight:500!important;color:#b4b2ad!important}
+main .proof-index,main .proof-signal{font-weight:600!important}
