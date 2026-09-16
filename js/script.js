@@ -23,6 +23,45 @@ document.addEventListener('DOMContentLoaded',()=>{
     document.head.appendChild(style);
   }
 
+  /* Directly constrain the contact block on small screens. This is intentional
+     inline styling so older/cached stylesheet rules cannot make the cards huge. */
+  const compactContact=()=>{
+    const contact=document.getElementById('contact');
+    if(!contact)return;
+    if(window.innerWidth<=850){
+      contact.style.setProperty('height','auto','important');
+      contact.style.setProperty('min-height','0','important');
+      contact.style.setProperty('max-height','none','important');
+      contact.style.setProperty('padding','55px 6vw 45px','important');
+      const actions=contact.querySelector('.contact-actions');
+      if(actions){
+        actions.style.setProperty('display','grid','important');
+        actions.style.setProperty('grid-template-columns','repeat(2,minmax(0,1fr))','important');
+        actions.style.setProperty('gap','8px','important');
+        actions.style.setProperty('height','auto','important');
+        actions.style.setProperty('min-height','0','important');
+        actions.style.setProperty('margin','1.2rem auto 0','important');
+      }
+      contact.querySelectorAll('.contact-link').forEach(card=>{
+        card.style.setProperty('display','flex','important');
+        card.style.setProperty('height',window.innerWidth<=600?'68px':'78px','important');
+        card.style.setProperty('min-height',window.innerWidth<=600?'68px':'78px','important');
+        card.style.setProperty('max-height',window.innerWidth<=600?'68px':'78px','important');
+        card.style.setProperty('width','100%','important');
+        card.style.setProperty('padding',window.innerWidth<=600?'9px 10px':'10px 11px','important');
+        card.style.setProperty('box-sizing','border-box','important');
+        card.style.setProperty('overflow','hidden','important');
+        card.style.setProperty('font-size','0.7rem','important');
+      });
+    }else{
+      contact.style.removeProperty('height');
+      contact.style.removeProperty('min-height');
+      contact.style.removeProperty('max-height');
+      contact.style.removeProperty('padding');
+    }
+  };
+  compactContact();
+
   const menu=document.getElementById('menu-btn');
   const nav=document.getElementById('nav-menu');
   if(!menu||!nav)return;
@@ -59,5 +98,6 @@ document.addEventListener('DOMContentLoaded',()=>{
   nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
   window.addEventListener('resize',()=>{
     if(window.innerWidth>850)closeMenu();
+    compactContact();
   });
 });
