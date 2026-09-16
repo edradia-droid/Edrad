@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       .contact-brand-exact .brand-mark{display:grid!important;width:29px!important;height:29px!important;flex:0 0 29px!important;font-size:15px!important}
       .contact-brand-exact strong{display:block!important;font:800 1rem/1 'DM Mono',monospace!important;letter-spacing:.04em!important;color:var(--text)!important}
       .contact-brand-exact strong:before,.contact-brand-exact strong:after{content:none!important;display:none!important}
-      .contact-brand-exact small{display:block!important;margin-top:4px!important;font:4.4px/1.4 'DM Mono',monospace!important;letter-spacing:.045em!important;color:#777!important;white-space:normal!important;max-width:105px!important}
+      .contact-brand-exact small{display:block!important;margin-top:4px!important;font:500 7px/1.5 'DM Mono',monospace!important;letter-spacing:.055em!important;color:#b8b6b0!important;white-space:normal!important;max-width:250px!important}
     `;
     document.head.appendChild(style);
   }
