@@ -1,26 +1,29 @@
-name: Apply Contact Brand Layout Fix
+name: Apply EDRAD Brand Layout Fix
 on:
   push:
     branches: [main]
 permissions:
   contents: write
 jobs:
-  fix-contact-brand:
-    if: github.event.head_commit.message != 'Place EDRAD branding at top of contacts'
+  fix-edrad-brand:
+    if: github.event.head_commit.message != 'Set full EDRAD brand in top-left header'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Place EDRAD brand at top of contact section
+      - name: Replace top-left logo with full EDRAD brand lockup
         run: |
           python3 - <<'PY'
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text()
-          s = s.replace('.contact-brand{display:none}', ".contact-brand{display:inline-flex;align-items:center;gap:11px;text-align:left;margin:1rem 0 0;padding:9px 13px 9px 9px;border:1px solid rgba(217,255,87,.18);background:rgba(217,255,87,.035);box-shadow:inset 0 0 25px rgba(217,255,87,.025);backdrop-filter:blur(12px)}.contact-brand .brand-mark{width:35px;height:35px;font-size:19px}")
-          s = s.replace('<div class="contact-brand contact-brand-bottom"><strong>EDRAD</strong><small>ENGINEERING DIGITAL RESOURCES, APPLICATIONS & DEVELOPMENT</small></div>', '<div class="contact-brand"><span class="brand-mark">E</span><div><strong>DRAD</strong><small>ENGINEERING DIGITAL RESOURCES, APPLICATIONS & DEVELOPMENT</small></div></div>')
-          start = '.contact-brand-bottom{display:flex;align-items:flex-end;gap:12px;margin:34px 0 0;padding:14px 0 0;border:0;border-top:1px solid var(--line);background:transparent;text-align:left}.contact-brand-bottom strong{font:800 1.15rem/1 \'DM Mono\',monospace;letter-spacing:.04em;color:var(--text)}.contact-brand-bottom small{margin-top:0;max-width:420px}.contact-brand-bottom .brand-mark{display:none}'
-          s = s.replace(start, '')
-          s = s.replace('.contact-brand small{font-size:6px}', '.contact-brand small{font-size:6px}')
+          old_css = ".brand-lockup{display:inline-flex;align-items:center;gap:0;color:var(--text);text-decoration:none;letter-spacing:-.06em;font-weight:800;line-height:1}.brand-mark{display:grid;place-items:center;width:29px;height:29px;margin-right:2px;background:var(--accent);color:#0a0a0b;font:800 16px/1 Manrope,sans-serif;clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%);position:relative}.brand-mark:after{content:'';position:absolute;right:5px;top:5px;width:7px;height:7px;border:1px solid #0a0a0b;border-radius:50%;opacity:.65}.brand-name{font:800 1.35rem/1 'DM Mono',monospace;letter-spacing:.02em}"
+          new_css = ".brand-lockup{display:inline-flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;letter-spacing:-.02em;font-weight:800;line-height:1}.brand-lockup .brand-mark{display:grid;place-items:center;width:35px;height:35px;margin-right:0;background:var(--accent);color:#0a0a0b;font:800 19px/1 Manrope,sans-serif;clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%);position:relative;flex:0 0 auto}.brand-lockup .brand-mark:after{content:'';position:absolute;right:5px;top:5px;width:7px;height:7px;border:1px solid #0a0a0b;border-radius:50%;opacity:.65}.brand-lockup-copy{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.brand-name{font:800 1.12rem/1 'DM Mono',monospace;letter-spacing:.04em}.brand-tagline{font:7px/1.2 'DM Mono',monospace;letter-spacing:.07em;color:#777;white-space:nowrap}"
+          if old_css in s:
+              s = s.replace(old_css, new_css)
+          old_header = '<a href="#home" class="brand-lockup" aria-label="EDRAD — Engineering Digital Resources, Applications and Development"><span class="brand-mark">E</span><span class="brand-name">DRAD</span></a>'
+          new_header = '<a href="#home" class="brand-lockup" aria-label="EDRAD — Engineering Digital Resources, Applications and Development"><span class="brand-mark">E</span><span class="brand-lockup-copy"><span class="brand-name">DRAD</span><span class="brand-tagline">ENGINEERING DIGITAL RESOURCES, APPLICATIONS &amp; DEVELOPMENT</span></span></a>'
+          s = s.replace(old_header, new_header)
+          s = s.replace('.brand-name{font-size:1.18rem}', '.brand-name{font-size:1.18rem}.brand-tagline{font-size:6px;letter-spacing:.055em}')
           p.write_text(s)
           PY
       - name: Commit change
@@ -29,5 +32,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
           git diff --cached --quiet && exit 0
-          git commit -m 'Place EDRAD branding at top of contacts'
+          git commit -m 'Set full EDRAD brand in top-left header'
           git push
