@@ -67,15 +67,25 @@ jobs:
           s = p.read_text(encoding='utf-8')
           marker = 'tech-bg-layer'
           if marker not in s:
-              css = '''\n<style id="tech-bg-layer">\nhtml,body{background:#080809!important}\nbody{position:relative;isolation:isolate}\nbody:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:url("assets/tech-background.svg") center top/cover repeat-y;opacity:.62;filter:saturate(.72) contrast(.92)}\nbody:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 50% 35%,rgba(8,8,9,.08),rgba(8,8,9,.78) 78%),linear-gradient(180deg,rgba(8,8,9,.28),rgba(8,8,9,.62));backdrop-filter:blur(.25px)}\nmain,.navbar,footer{position:relative;z-index:0}\n@media(max-width:700px){body:before{background-size:auto 900px;opacity:.42}body:after{background:linear-gradient(180deg,rgba(8,8,9,.42),rgba(8,8,9,.76))}}\n</style>\n'''
+              css = '''
+<style id="tech-bg-layer">
+html,body{background:#080809!important}
+body{position:relative;isolation:isolate}
+body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:url("assets/tech-background.svg") center top/cover repeat-y;opacity:.62;filter:saturate(.72) contrast(.92)}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 50% 35%,rgba(8,8,9,.08),rgba(8,8,9,.78) 78%),linear-gradient(180deg,rgba(8,8,9,.28),rgba(8,8,9,.62));backdrop-filter:blur(.25px)}
+main,.navbar,footer{position:relative;z-index:0}
+@media(max-width:700px){body:before{background-size:auto 900px;opacity:.42}body:after{background:linear-gradient(180deg,rgba(8,8,9,.42),rgba(8,8,9,.76))}}
+</style>
+'''
               s = s.replace('</head>', css + '</head>', 1)
               p.write_text(s, encoding='utf-8')
           PY
 
-      - name: Commit background
+      - name: Commit background safely after concurrent updates
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html assets/tech-background.svg
           git commit -m "Apply faded tech background"
-          git push
+          git pull --rebase origin main
+          git push origin HEAD:main
