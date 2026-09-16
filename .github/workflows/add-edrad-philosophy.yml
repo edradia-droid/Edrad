@@ -1,0 +1,52 @@
+name: Add EDRAD Philosophy Statement
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  add-philosophy:
+    if: github.event.head_commit.message != 'Add EDRAD philosophy statement'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add statement to hero
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          if 'class="edrad-philosophy"' in s:
+              raise SystemExit('EDRAD philosophy statement already exists')
+
+          heading = 'I build digital experiences that feel alive.'
+          pattern = r'(<h1[^>]*>\s*' + re.escape(heading) + r'\s*</h1>)'
+          match = re.search(pattern, s, flags=re.I)
+          if not match:
+              raise SystemExit('Hero headline not found')
+
+          statement = '''\n        <div class="edrad-philosophy" aria-label="EDRAD brand philosophy">\n          <strong>ENGINEERING DIGITAL RESOURCES, APPLICATIONS &amp; DEVELOPMENT</strong>\n          <span>Connecting engineering thinking with digital solutions.</span>\n        </div>'''
+
+          s = s[:match.end()] + statement + s[match.end():]
+
+          css = '''\n    .edrad-philosophy{display:flex;flex-direction:column;gap:7px;margin:1.1rem 0 1.5rem;padding-left:14px;border-left:2px solid var(--accent);max-width:700px}\n    .edrad-philosophy strong{font:700 .72rem/1.45 'DM Mono',monospace;letter-spacing:.1em;color:var(--accent)}\n    .edrad-philosophy span{font:500 .88rem/1.5 Manrope,sans-serif;letter-spacing:.01em;color:#9a9a9e}\n    @media(max-width:600px){.edrad-philosophy{margin:.9rem 0 1.3rem;padding-left:11px;gap:5px}.edrad-philosophy strong{font-size:.58rem;letter-spacing:.075em}.edrad-philosophy span{font-size:.78rem}}\n'''
+          s = s.replace('</style>', css + '  </style>', 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit hero statement
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add EDRAD philosophy statement"
+          git push
