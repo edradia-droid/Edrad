@@ -28,8 +28,8 @@ jobs:
           if 'class="edrad-philosophy"' in s:
               raise SystemExit('EDRAD philosophy statement already exists')
 
-          heading = 'I build digital experiences that feel alive.'
-          match = re.search(re.escape(heading), s, flags=re.I)
+          phrase = r'I\s*(?:<[^>]+>\s*)*build\s*(?:<[^>]+>\s*)*digital\s*(?:<[^>]+>\s*)*experiences\s*(?:<[^>]+>\s*)*that\s*(?:<[^>]+>\s*)*feel\s*(?:<[^>]+>\s*)*alive\.'
+          match = re.search(phrase, s, flags=re.I)
           if not match:
               raise SystemExit('Hero headline text not found')
 
