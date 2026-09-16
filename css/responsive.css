@@ -1,49 +1,9 @@
 @media(max-width:850px){.project-highlights{grid-template-columns:1fr}.services-intro{grid-template-columns:1fr;gap:1.5rem}.timeline{padding-left:1.5rem}.timeline div:before{left:-1.78rem}nav,.nav-cta{display:none}.menu-btn{display:flex;background:none;border:0;flex-direction:column;gap:5px}.menu-btn span{display:block;width:24px;height:1px;background:#fff}.hero{padding-top:130px}.hero-side{position:relative;right:auto;bottom:auto;width:100%;margin:4rem 0 1rem}.hero h1{font-size:clamp(3.4rem,13vw,5.5rem)}.about-grid,.project-card{grid-template-columns:1fr;gap:2rem}.project-visual{min-height:330px}.skill-grid{grid-template-columns:1fr}.skill-grid>div:nth-child(odd){border-right:0}section:not(.hero){padding:90px 6vw}footer{gap:15px;flex-wrap:wrap}.scroll-hint{display:none}.hero-proof{width:100%;margin-top:1.8rem}.proof-heading{gap:9px}.proof-index{display:none}.proof-signal{margin-left:auto}.proof-items{grid-template-columns:repeat(3,1fr);gap:8px}.proof-item{min-height:88px}.proof-one{transform:translateY(5px)}.proof-two{transform:translateY(-2px)}.proof-three{transform:translateY(6px)}.proof-four{transform:translateY(-1px)}.proof-five{transform:translateY(7px)}}@media(max-width:600px){.hero-actions{flex-direction:column;align-items:flex-start}.btn{width:100%;justify-content:space-between}.hero-copy{font-size:.92rem}.project-screen{width:88%}.skill-grid>div{padding:1.5rem 0}.navbar{padding:0 5vw}.hero-proof{margin-top:1.7rem}.proof-heading strong{font-size:9px}.proof-signal{font-size:7px}.proof-line{min-width:20px}.proof-items{grid-template-columns:1fr 1fr}.proof-item{width:100%;min-height:88px}.proof-one{grid-column:1/-1}.proof-one,.proof-two,.proof-three,.proof-four,.proof-five{transform:none}.proof-item:hover,.proof-one:hover,.proof-two:hover,.proof-three:hover,.proof-four:hover,.proof-five:hover{transform:translateY(-4px)}}@media(max-width:380px){.proof-items{grid-template-columns:1fr}.proof-one{grid-column:auto}.proof-item{min-height:78px}.proof-icon{right:10px}.proof-item strong{font-size:8px}.proof-icon{right:10px}}
 
-/* EDRAD TECH BACKGROUND — content remains dominant */
-html{background:#050506!important}
-body{background:#050506!important;position:relative;isolation:isolate}
-body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("../assets/tech-background.svg?v=edrad-devices-5")!important;background-position:center top!important;background-size:cover!important;background-repeat:repeat-y!important;opacity:.62!important;filter:saturate(.72) contrast(.94)!important;mix-blend-mode:screen!important}
-body:after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(5,5,6,.18),rgba(5,5,6,.36))!important}
-main{position:relative;z-index:1!important;background:transparent!important}
-.navbar,footer{position:relative;z-index:20!important}
-.hero,.about,.work,.services,.journey,.contact{background-color:transparent!important}
-.work,.services,.journey{background-image:linear-gradient(rgba(10,10,11,.10),rgba(10,10,11,.10))!important}
-.contact{background-image:linear-gradient(rgba(17,17,19,.25),rgba(17,17,19,.25))!important}
-@media(max-width:700px){body:before{background-size:auto 900px!important;opacity:.52!important}body:after{background:linear-gradient(180deg,rgba(5,5,6,.24),rgba(5,5,6,.42))!important}}
-
-/* EDRAD MAIN CONTENT — stronger small text for readability */
-main p{font-weight:500!important;color:#b4b2ad!important}
-main .hero-copy{font-weight:500!important}
-main .about-grid p,.services-intro p,.service-list p,.timeline p,.contact>p:not(.section-label),.project-info>p:not(.project-type){font-weight:500!important;color:#b4b2ad!important}
-main .section-label,main .eyebrow,main .project-type{font-weight:600!important;color:#b4b2ad!important}
-main .skill-grid p{font-weight:500!important;color:#b4b2ad!important}
-main .project-highlights span{font-weight:500!important;color:#b4b2ad!important}
-main .proof-index,main .proof-signal{font-weight:600!important}
-
-/* Mobile navigation: force the existing menu to open above the page content */
-@media(max-width:850px){
-  .navbar nav.open{display:flex!important;position:absolute!important;top:82px!important;left:0!important;right:0!important;flex-direction:column!important;gap:0!important;padding:10px 6vw 18px!important;background:rgba(10,10,11,.97)!important;border-bottom:1px solid rgba(255,255,255,.08)!important;backdrop-filter:blur(16px)!important;-webkit-backdrop-filter:blur(16px)!important;z-index:999!important}
-  .navbar nav.open a{display:block!important;width:100%!important;padding:13px 0!important;color:var(--muted)!important;font-size:.82rem!important}
-  .navbar nav.open a:hover,.navbar nav.open a.active{color:var(--text)!important}
-}
-
-/* Hide only the footer's bottom-right Back to top link; keep contact navigation */
-footer>.footer-brand + p + a{display:none!important}
-
-/* Mobile contact cards — the original .contact-actions is flex, so explicitly switch it to grid */
+/* Contact brand: reproduce the footer's green E geometry and connection point */
 @media(max-width:600px){
-  .contact-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;margin-top:1.4rem!important;width:100%!important}
-  .contact-actions .contact-link{min-height:0!important;height:70px!important;padding:10px 11px!important;gap:3px!important;font-size:1rem!important;box-sizing:border-box!important}
-  .contact-actions .contact-index{left:9px!important;top:8px!important;font-size:6px!important}
-  .contact-actions .contact-logo{width:25px!important;height:25px!important;right:8px!important;top:8px!important}
-  .contact-actions .contact-label{font-size:7px!important;letter-spacing:.05em!important}
-  .contact-actions .contact-value{font-size:.58rem!important;line-height:1.05!important;max-width:78%!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
-  .contact-actions .contact-action{font-size:6px!important;margin-top:1px!important;letter-spacing:.05em!important}
-  .contact-actions .secondary-contact{grid-column:1/-1!important}
-
-  /* Make the contact E mark match the footer more clearly: solid connection point + tighter DRAD */
-  .contact-brand-bottom strong{font-size:0!important;display:flex!important;align-items:center!important;gap:0!important;color:transparent!important}
-  .contact-brand-bottom strong:before{content:'E';display:grid;place-items:center;width:29px;height:29px;flex:0 0 29px;background:radial-gradient(circle at calc(100% - 5px) 5px,#0a0a0b 0 3px,transparent 3.5px),var(--accent);color:#0a0a0b;font:800 16px/1 Manrope,sans-serif;clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%);position:relative}
-  .contact-brand-bottom strong:after{content:'DRAD';color:var(--text);font:800 1.15rem/1 'DM Mono',monospace;letter-spacing:.04em}
+.contact-brand-bottom strong{font-size:0!important;display:inline-flex!important;align-items:center!important;vertical-align:middle!important;gap:2px!important;color:transparent!important;line-height:1!important}
+.contact-brand-bottom strong:before{content:'E';display:grid!important;place-items:center!important;width:29px!important;height:29px!important;flex:0 0 29px!important;background:var(--accent)!important;color:#0a0a0b!important;font:800 16px/1 Manrope,sans-serif!important;clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%)!important;position:relative!important}
+.contact-brand-bottom strong:after{content:'DRAD';display:inline-block!important;color:var(--text)!important;font:800 1.15rem/1 'DM Mono',monospace!important;letter-spacing:.01em!important;margin-left:0!important}
+.contact-brand-bottom small{display:block!important;margin-top:7px!important}
 }
