@@ -7,6 +7,17 @@ document.addEventListener('DOMContentLoaded',()=>{
   }),{threshold:.12});
   document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 
+  /* Use the actual header logo markup in the contact brand — no recreation. */
+  const headerBrand=document.querySelector('.header-brand-hero');
+  const contactBrand=document.querySelector('.contact-brand-bottom');
+  if(headerBrand&&contactBrand){
+    contactBrand.innerHTML=headerBrand.innerHTML;
+    contactBrand.classList.add('contact-brand-exact');
+    const style=document.createElement('style');
+    style.textContent='.contact-brand-exact .brand-mark{display:grid!important}.contact-brand-exact strong:before,.contact-brand-exact strong:after{content:none!important;display:none!important}';
+    document.head.appendChild(style);
+  }
+
   const menu=document.getElementById('menu-btn');
   const nav=document.getElementById('nav-menu');
   if(!menu||!nav)return;
