@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Add footer logo-only rule
         run: |
@@ -33,4 +35,10 @@ jobs:
           git add css/style.css
           git diff --cached --quiet && exit 0
           git commit -m "Set footer brand logo only"
-          git push
+          for i in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main && git push origin HEAD:main && exit 0
+            git rebase --abort || true
+            sleep 2
+          done
+          exit 1
