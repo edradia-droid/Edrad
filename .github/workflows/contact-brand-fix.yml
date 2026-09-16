@@ -6,19 +6,21 @@ permissions:
   contents: write
 jobs:
   fix-contact-brand:
-    if: github.event.head_commit.message != 'Move EDRAD contact brand to bottom-left'
+    if: github.event.head_commit.message != 'Place EDRAD branding at top of contacts'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Move contact brand to bottom-left and remove top logo
+      - name: Place EDRAD brand at top of contact section
         run: |
           python3 - <<'PY'
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text()
-          s = s.replace('.contact-brand{display:inline-flex;align-items:center;text-align:left;gap:11px;margin:1rem 0 0;padding:10px 14px 10px 10px;border:1px solid var(--line);background:rgba(255,255,255,.018)}.contact-brand .brand-mark{width:32px;height:32px}', '.contact-brand{display:none}')
-          s = s.replace('<div class="contact-brand"><span class="brand-mark">E</span><div><strong>DRAD</strong><small>ENGINEERING DIGITAL RESOURCES, APPLICATIONS & DEVELOPMENT</small></div></div>', '<div class="contact-brand contact-brand-bottom"><strong>EDRAD</strong><small>ENGINEERING DIGITAL RESOURCES, APPLICATIONS & DEVELOPMENT</small></div>')
-          s = s.replace('.contact-brand small{font-size:6px}', '.contact-brand small{font-size:6px}.contact-brand-bottom{display:flex;align-items:flex-end;gap:12px;margin:34px 0 0;padding:14px 0 0;border:0;border-top:1px solid var(--line);background:transparent;text-align:left}.contact-brand-bottom strong{font:800 1.15rem/1 \'DM Mono\',monospace;letter-spacing:.04em;color:var(--text)}.contact-brand-bottom small{margin-top:0;max-width:420px}.contact-brand-bottom .brand-mark{display:none}')
+          s = s.replace('.contact-brand{display:none}', ".contact-brand{display:inline-flex;align-items:center;gap:11px;text-align:left;margin:1rem 0 0;padding:9px 13px 9px 9px;border:1px solid rgba(217,255,87,.18);background:rgba(217,255,87,.035);box-shadow:inset 0 0 25px rgba(217,255,87,.025);backdrop-filter:blur(12px)}.contact-brand .brand-mark{width:35px;height:35px;font-size:19px}")
+          s = s.replace('<div class="contact-brand contact-brand-bottom"><strong>EDRAD</strong><small>ENGINEERING DIGITAL RESOURCES, APPLICATIONS & DEVELOPMENT</small></div>', '<div class="contact-brand"><span class="brand-mark">E</span><div><strong>DRAD</strong><small>ENGINEERING DIGITAL RESOURCES, APPLICATIONS & DEVELOPMENT</small></div></div>')
+          start = '.contact-brand-bottom{display:flex;align-items:flex-end;gap:12px;margin:34px 0 0;padding:14px 0 0;border:0;border-top:1px solid var(--line);background:transparent;text-align:left}.contact-brand-bottom strong{font:800 1.15rem/1 \'DM Mono\',monospace;letter-spacing:.04em;color:var(--text)}.contact-brand-bottom small{margin-top:0;max-width:420px}.contact-brand-bottom .brand-mark{display:none}'
+          s = s.replace(start, '')
+          s = s.replace('.contact-brand small{font-size:6px}', '.contact-brand small{font-size:6px}')
           p.write_text(s)
           PY
       - name: Commit change
@@ -27,5 +29,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
           git diff --cached --quiet && exit 0
-          git commit -m 'Move EDRAD contact brand to bottom-left'
+          git commit -m 'Place EDRAD branding at top of contacts'
           git push
