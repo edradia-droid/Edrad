@@ -30,3 +30,15 @@ main .proof-index,main .proof-signal{font-weight:600!important}
 
 /* Hide only the footer's bottom-right Back to top link; keep contact navigation */
 footer>.footer-brand + p + a{display:none!important}
+
+/* Compact contact cards on small screens */
+@media(max-width:600px){
+  .contact-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;margin-top:1.6rem!important}
+  .contact-link{min-height:82px!important;padding:12px!important;gap:4px!important}
+  .contact-index{left:12px!important;top:12px!important;font-size:7px!important}
+  .contact-logo{width:38px!important;height:38px!important;right:9px!important;top:9px!important}
+  .contact-label{font-size:9px!important;letter-spacing:.07em!important}
+  .contact-value{font-size:.72rem!important;line-height:1.2!important}
+  .contact-action{font-size:7px!important;margin-top:2px!important;letter-spacing:.07em!important}
+  .contact-actions .secondary-contact{grid-column:1/-1!important}
+}
