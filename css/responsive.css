@@ -42,8 +42,8 @@ footer>.footer-brand + p + a{display:none!important}
   .contact-actions .contact-action{font-size:6px!important;margin-top:1px!important;letter-spacing:.05em!important}
   .contact-actions .secondary-contact{grid-column:1/-1!important}
 
-  /* Match the footer brand mark: green E, connection-point circle, and tight DRAD spacing */
-  .contact-brand-bottom strong{font-size:0!important;display:flex!important;align-items:center!important;gap:3px!important;color:transparent!important}
-  .contact-brand-bottom strong:before{content:'E';display:grid;place-items:center;width:29px;height:29px;flex:0 0 29px;background:radial-gradient(circle at calc(100% - 5px) 5px,transparent 0 2px,#0a0a0b 2px 3px,transparent 3.5px),var(--accent);color:#0a0a0b;font:800 16px/1 Manrope,sans-serif;clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%);position:relative}
+  /* Make the contact E mark match the footer more clearly: solid connection point + tighter DRAD */
+  .contact-brand-bottom strong{font-size:0!important;display:flex!important;align-items:center!important;gap:0!important;color:transparent!important}
+  .contact-brand-bottom strong:before{content:'E';display:grid;place-items:center;width:29px;height:29px;flex:0 0 29px;background:radial-gradient(circle at calc(100% - 5px) 5px,#0a0a0b 0 3px,transparent 3.5px),var(--accent);color:#0a0a0b;font:800 16px/1 Manrope,sans-serif;clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%);position:relative}
   .contact-brand-bottom strong:after{content:'DRAD';color:var(--text);font:800 1.15rem/1 'DM Mono',monospace;letter-spacing:.04em}
 }
