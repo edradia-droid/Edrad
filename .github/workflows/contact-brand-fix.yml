@@ -6,7 +6,7 @@ permissions:
   contents: write
 jobs:
   fix-header-brand:
-    if: github.event.head_commit.message != 'Move EDRAD hero brand to top header'
+    if: github.event.head_commit.message != 'Apply EDRAD header brand layout'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,7 +27,7 @@ jobs:
               s = s.replace(old_hero, '', 1)
 
           import re
-          s = re.sub(r'\\.header-brand\\{.*?\\}@media\\(max-width:600px\\)\\{.*?\\}', '', s, count=1)
+          s = re.sub(r'\.header-brand\{.*?\}@media\(max-width:600px\)\{.*?\}', '', s, count=1)
 
           css = '''
           .navbar .header-brand-hero{display:inline-flex;align-items:center;gap:14px;margin:0;padding:12px 18px 12px 12px;width:auto;min-width:300px;border:1px solid rgba(217,255,87,.28);background:rgba(217,255,87,.055);box-shadow:0 0 35px rgba(217,255,87,.07),inset 0 0 28px rgba(217,255,87,.035);backdrop-filter:blur(14px);color:var(--text);text-decoration:none;transition:border-color .3s ease,box-shadow .3s ease,transform .3s ease}
