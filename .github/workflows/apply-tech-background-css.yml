@@ -1,0 +1,38 @@
+name: Apply Tech Background CSS
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.event.head_commit.message != 'Apply tech background CSS'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply background styling
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('css/style.css')
+          s = p.read_text(encoding='utf-8')
+          marker = '/* EDRAD TECH BACKGROUND */'
+          if marker not in s:
+              s += '''\n\n/* EDRAD TECH BACKGROUND */\nhtml,body{background:#080809!important}\nbody{position:relative;isolation:isolate}\nbody:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:url("../assets/tech-background.svg") center top/cover repeat-y;opacity:.55;filter:saturate(.72) contrast(.92)}\nbody:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(circle at 50% 35%,rgba(8,8,9,.08),rgba(8,8,9,.78) 78%),linear-gradient(180deg,rgba(8,8,9,.28),rgba(8,8,9,.62));backdrop-filter:blur(.25px)}\nmain,.navbar,footer{position:relative;z-index:0}\n@media(max-width:700px){body:before{background-size:auto 900px;opacity:.38}body:after{background:linear-gradient(180deg,rgba(8,8,9,.42),rgba(8,8,9,.76))}}\n'''
+              p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Commit styling safely
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add css/style.css
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Apply tech background CSS"
+          git push origin HEAD:main
