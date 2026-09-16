@@ -2,10 +2,70 @@
 <defs>
 <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse"><path d="M60 0H0V60" fill="none" stroke="#d9ff57" stroke-opacity=".10" stroke-width="1"/></pattern>
 <radialGradient id="glow" cx="50%" cy="45%" r="65%"><stop offset="0" stop-color="#d9ff57" stop-opacity=".08"/><stop offset=".55" stop-color="#d9ff57" stop-opacity=".02"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+<linearGradient id="device" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8e8e8" stop-opacity=".15"/><stop offset="1" stop-color="#d9ff57" stop-opacity=".07"/></linearGradient>
 </defs>
 <rect width="1440" height="900" fill="url(#grid)"/><rect width="1440" height="900" fill="url(#glow)"/>
+
+<!-- TECH / PROGRAMMING TYPOGRAPHY -->
 <g fill="#e8e8e8" fill-opacity=".12" font-family="monospace" font-size="34" font-weight="700" letter-spacing="2">
 <text x="90" y="120" transform="rotate(-8 90 120)">HTML5</text><text x="410" y="90" transform="rotate(7 410 90)">CSS3</text><text x="760" y="150" transform="rotate(-5 760 150)">JAVASCRIPT</text><text x="1060" y="82" transform="rotate(8 1060 82)">PYTHON</text><text x="1240" y="260" transform="rotate(-7 1240 260)">REACT</text><text x="250" y="390" transform="rotate(6 250 390)">NODE.JS</text><text x="600" y="360" transform="rotate(-5 600 360)">GITHUB</text><text x="930" y="410" transform="rotate(8 930 410)">API</text><text x="1160" y="510" transform="rotate(-6 1160 510)">SQL</text><text x="180" y="620" transform="rotate(-7 180 620)">SUPABASE</text><text x="500" y="590" transform="rotate(6 500 590)">JSON</text><text x="850" y="650" transform="rotate(-8 850 650)">GIT</text><text x="1040" y="720" transform="rotate(5 1040 720)">DATABASE</text><text x="1320" y="640" transform="rotate(-6 1320 640)">CLOUD</text><text x="720" y="790" transform="rotate(5 720 790)">&lt;/&gt;</text><text x="70" y="820" transform="rotate(-5 70 820)">01</text><text x="390" y="760" transform="rotate(7 390 760)">{ }</text><text x="970" y="860" transform="rotate(-5 970 860)">[ ]</text>
 </g>
-<g fill="none" stroke="#d9ff57" stroke-opacity=".07" stroke-width="1"><path d="M80 250 C250 160 320 300 470 220 S760 170 900 260 1170 180 1370 290"/><path d="M30 540 C220 450 350 570 520 500 S820 430 990 550 1210 470 1410 530"/><circle cx="260" cy="250" r="90"/><circle cx="1120" cy="350" r="120"/><circle cx="730" cy="610" r="105"/></g>
+
+<!-- LAPTOPS / COMPUTERS: subtle architectural line art -->
+<g fill="none" stroke="#e8e8e8" stroke-opacity=".13" stroke-width="2">
+  <!-- laptop, upper left -->
+  <rect x="115" y="245" width="190" height="112" rx="5" fill="url(#device)"/>
+  <path d="M102 370h216l-18 17H120z" fill="none"/>
+  <path d="M130 270h160M130 286h105M130 302h76" stroke="#d9ff57" stroke-opacity=".10"/>
+  <path d="M136 326l18-18 14 14 22-27" stroke="#d9ff57" stroke-opacity=".14"/>
+  <!-- desktop monitor, right -->
+  <rect x="1110" y="170" width="205" height="126" rx="5" fill="url(#device)"/>
+  <path d="M1212 296v28M1175 325h75"/>
+  <path d="M1130 198h165M1130 218h92M1130 238h130" stroke="#d9ff57" stroke-opacity=".10"/>
+  <circle cx="1145" cy="270" r="4" stroke="#d9ff57" stroke-opacity=".13"/>
+  <path d="M1160 270h70" stroke="#d9ff57" stroke-opacity=".11"/>
+  <!-- compact laptop, lower right -->
+  <rect x="1180" y="690" width="170" height="98" rx="5" fill="url(#device)"/>
+  <path d="M1165 800h200l-18 15h-164z"/>
+  <path d="M1198 716h132M1198 734h82M1198 752h105" stroke="#d9ff57" stroke-opacity=".10"/>
+</g>
+
+<!-- VERTICAL DATABASE CYLINDERS -->
+<g fill="none" stroke="#d9ff57" stroke-opacity=".15" stroke-width="2">
+  <ellipse cx="500" cy="205" rx="66" ry="18" fill="url(#device)"/>
+  <path d="M434 205v92c0 10 30 18 66 18s66-8 66-18v-92"/>
+  <path d="M434 235c0 10 30 18 66 18s66-8 66-18M434 265c0 10 30 18 66 18s66-8 66-18"/>
+  <ellipse cx="500" cy="297" rx="66" ry="18"/>
+  <!-- second vertical database -->
+  <ellipse cx="820" cy="700" rx="58" ry="16" fill="url(#device)"/>
+  <path d="M762 700v82c0 9 26 16 58 16s58-7 58-16v-82"/>
+  <path d="M762 727c0 9 26 16 58 16s58-7 58-16M762 754c0 9 26 16 58 16s58-7 58-16"/>
+  <ellipse cx="820" cy="782" rx="58" ry="16"/>
+</g>
+
+<!-- HORIZONTAL DATABASE / DATA-SERVER STACKS -->
+<g fill="none" stroke="#e8e8e8" stroke-opacity=".14" stroke-width="2">
+  <g transform="translate(650 480)">
+    <rect x="0" y="0" width="250" height="58" rx="8" fill="url(#device)"/>
+    <rect x="0" y="72" width="250" height="58" rx="8" fill="url(#device)"/>
+    <rect x="0" y="144" width="250" height="58" rx="8" fill="url(#device)"/>
+    <circle cx="25" cy="29" r="5" stroke="#d9ff57" stroke-opacity=".18"/><circle cx="25" cy="101" r="5"/><circle cx="25" cy="173" r="5"/>
+    <path d="M48 24h125M48 96h155M48 168h105" stroke="#d9ff57" stroke-opacity=".10"/>
+    <path d="M190 20h35M205 92h20M180 164h45" stroke="#d9ff57" stroke-opacity=".12"/>
+  </g>
+</g>
+
+<!-- NETWORK / DATA CONNECTIONS -->
+<g fill="none" stroke="#d9ff57" stroke-opacity=".07" stroke-width="1">
+  <path d="M80 250 C250 160 320 300 470 220 S760 170 900 260 1170 180 1370 290"/>
+  <path d="M30 540 C220 450 350 570 520 500 S820 430 990 550 1210 470 1410 530"/>
+  <path d="M305 300 C370 270 400 240 434 220M566 220 C640 250 685 300 730 350M900 480 C980 420 1050 370 1110 300M878 700 C960 690 1040 690 1180 720"/>
+  <circle cx="260" cy="250" r="90"/><circle cx="1120" cy="350" r="120"/><circle cx="730" cy="610" r="105"/>
+  <circle cx="434" cy="220" r="4" fill="#d9ff57" fill-opacity=".20"/><circle cx="1110" cy="300" r="4" fill="#d9ff57" fill-opacity=".20"/><circle cx="1180" cy="720" r="4" fill="#d9ff57" fill-opacity=".20"/>
+</g>
+
+<!-- SMALL CODE / SYSTEM GLYPHS -->
+<g fill="#d9ff57" fill-opacity=".11" font-family="monospace" font-size="22">
+  <text x="330" y="180">&lt;div /&gt;</text><text x="1010" y="590">{ API }</text><text x="95" y="735">sudo_</text><text x="1010" y="110">0xEDRAD</text>
+</g>
 </svg>
