@@ -20,3 +20,6 @@ main .section-label,main .eyebrow,main .project-type{font-weight:600!important;c
 main .skill-grid p{font-weight:500!important;color:#b4b2ad!important}
 main .project-highlights span{font-weight:500!important;color:#b4b2ad!important}
 main .proof-index,main .proof-signal{font-weight:600!important}
+
+/* Hide only the footer's bottom-right Back to top link */
+footer>a:last-child{display:none!important}
