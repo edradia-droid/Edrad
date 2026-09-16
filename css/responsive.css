@@ -31,21 +31,14 @@ main .proof-index,main .proof-signal{font-weight:600!important}
 /* Hide only the footer's bottom-right Back to top link; keep contact navigation */
 footer>.footer-brand + p + a{display:none!important}
 
-/* Compact contact cards on small screens */
+/* Mobile contact cards — the original .contact-actions is flex, so explicitly switch it to grid */
 @media(max-width:600px){
-  .contact-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:6px!important;margin-top:1.2rem!important}
-  .contact-link{min-height:55px!important;height:55px!important;padding:7px 9px!important;gap:2px!important;font-size:1rem!important}
-  .contact-index{left:8px!important;top:7px!important;font-size:6px!important}
-  .contact-logo{width:25px!important;height:25px!important;right:7px!important;top:7px!important}
-  .contact-label{font-size:7px!important;letter-spacing:.05em!important}
-  .contact-value{font-size:.58rem!important;line-height:1.05!important}
-  .contact-action{font-size:6px!important;margin-top:1px!important;letter-spacing:.05em!important}
+  .contact-actions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important;margin-top:1.4rem!important;width:100%!important}
+  .contact-actions .contact-link{min-height:0!important;height:70px!important;padding:10px 11px!important;gap:3px!important;font-size:1rem!important;box-sizing:border-box!important}
+  .contact-actions .contact-index{left:9px!important;top:8px!important;font-size:6px!important}
+  .contact-actions .contact-logo{width:25px!important;height:25px!important;right:8px!important;top:8px!important}
+  .contact-actions .contact-label{font-size:7px!important;letter-spacing:.05em!important}
+  .contact-actions .contact-value{font-size:.58rem!important;line-height:1.05!important;max-width:78%!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  .contact-actions .contact-action{font-size:6px!important;margin-top:1px!important;letter-spacing:.05em!important}
   .contact-actions .secondary-contact{grid-column:1/-1!important}
-}
-
-/* Extra-small contact cards: keep WhatsApp numbers and email compact, not full-screen blocks */
-@media(max-width:600px){
-  .contact-actions .contact-whatsapp,.contact-actions .contact-email{min-height:52px!important;height:52px!important;padding:6px 8px!important}
-  .contact-actions .contact-logo{width:23px!important;height:23px!important}
-  .contact-actions .contact-value{font-size:.55rem!important;max-width:75%!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
 }
