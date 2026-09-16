@@ -1,9 +1,17 @@
 @media(max-width:850px){.project-highlights{grid-template-columns:1fr}.services-intro{grid-template-columns:1fr;gap:1.5rem}.timeline{padding-left:1.5rem}.timeline div:before{left:-1.78rem}nav,.nav-cta{display:none}.menu-btn{display:flex;background:none;border:0;flex-direction:column;gap:5px}.menu-btn span{display:block;width:24px;height:1px;background:#fff}.hero{padding-top:130px}.hero-side{position:relative;right:auto;bottom:auto;width:100%;margin:4rem 0 1rem}.hero h1{font-size:clamp(3.4rem,13vw,5.5rem)}.about-grid,.project-card{grid-template-columns:1fr;gap:2rem}.project-visual{min-height:330px}.skill-grid{grid-template-columns:1fr}.skill-grid>div:nth-child(odd){border-right:0}section:not(.hero){padding:90px 6vw}footer{gap:15px;flex-wrap:wrap}.scroll-hint{display:none}.hero-proof{width:100%;margin-top:1.8rem}.proof-heading{gap:9px}.proof-index{display:none}.proof-signal{margin-left:auto}.proof-items{grid-template-columns:repeat(3,1fr);gap:8px}.proof-item{min-height:88px}.proof-one{transform:translateY(5px)}.proof-two{transform:translateY(-2px)}.proof-three{transform:translateY(6px)}.proof-four{transform:translateY(-1px)}.proof-five{transform:translateY(7px)}}@media(max-width:600px){.hero-actions{flex-direction:column;align-items:flex-start}.btn{width:100%;justify-content:space-between}.hero-copy{font-size:.92rem}.project-screen{width:88%}.skill-grid>div{padding:1.5rem 0}.navbar{padding:0 5vw}.hero-proof{margin-top:1.7rem}.proof-heading strong{font-size:9px}.proof-signal{font-size:7px}.proof-line{min-width:20px}.proof-items{grid-template-columns:1fr 1fr}.proof-item{width:100%;min-height:88px}.proof-one{grid-column:1/-1}.proof-one,.proof-two,.proof-three,.proof-four,.proof-five{transform:none}.proof-item:hover,.proof-one:hover,.proof-two:hover,.proof-three:hover,.proof-four:hover,.proof-five:hover{transform:translateY(-4px)}}@media(max-width:380px){.proof-items{grid-template-columns:1fr}.proof-one{grid-column:auto}.proof-item{min-height:78px}.proof-icon{right:10px}.proof-item strong{font-size:8px}.proof-icon{right:10px}}
 
-/* Contact brand: reproduce the footer's green E geometry and connection point */
+/* Use the exact same EDRAD brand-mark geometry as the top header logo. */
 @media(max-width:600px){
-.contact-brand-bottom strong{font-size:0!important;display:inline-flex!important;align-items:center!important;vertical-align:middle!important;gap:2px!important;color:transparent!important;line-height:1!important}
-.contact-brand-bottom strong:before{content:'E';display:grid!important;place-items:center!important;width:29px!important;height:29px!important;flex:0 0 29px!important;background:var(--accent)!important;color:#0a0a0b!important;font:800 16px/1 Manrope,sans-serif!important;clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%)!important;position:relative!important}
-.contact-brand-bottom strong:after{content:'DRAD';display:inline-block!important;color:var(--text)!important;font:800 1.15rem/1 'DM Mono',monospace!important;letter-spacing:.01em!important;margin-left:0!important}
-.contact-brand-bottom small{display:block!important;margin-top:7px!important}
+.contact-brand-bottom strong{display:inline-flex!important;align-items:center!important;gap:0!important;font-size:0!important;line-height:1!important;color:transparent!important}
+.contact-brand-bottom strong:before{content:'E';display:grid!important;place-items:center!important;width:35px!important;height:35px!important;flex:0 0 35px!important;margin-right:2px!important;background:var(--accent)!important;color:#0a0a0b!important;font:800 19px/1 Manrope,sans-serif!important;clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%)!important;position:relative!important}
+.contact-brand-bottom strong:before{content:'E';}
+.contact-brand-bottom strong:after{content:'DRAD';display:inline-block!important;color:var(--text)!important;font:800 1.05rem/1 'DM Mono',monospace!important;letter-spacing:.04em!important}
+.contact-brand-bottom small{display:block!important;margin-top:4px!important;font:7px/1.4 'DM Mono',monospace!important;letter-spacing:.08em!important;color:#777!important}
+}
+/* Exact connection-point detail from the existing .brand-mark: */
+@media(max-width:600px){
+.contact-brand-bottom strong{position:relative!important}
+.contact-brand-bottom strong:before{box-sizing:border-box!important}
+.contact-brand-bottom strong:after{margin-left:0!important}
+.contact-brand-bottom strong{--brand-dot:none}
 }
