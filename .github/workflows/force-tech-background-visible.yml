@@ -21,18 +21,34 @@ jobs:
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-          s = s.replace('<link rel="stylesheet" href="css/responsive.css">', '<link rel="stylesheet" href="css/responsive.css?v=edrad-tech-2">', 1)
-          marker = '/* EDRAD FORCE TECH BACKGROUND */'
+          s = s.replace('<link rel="stylesheet" href="css/responsive.css">', '<link rel="stylesheet" href="css/responsive.css?v=edrad-tech-3">', 1)
+          marker = '/* EDRAD FORCE TECH BACKGROUND V3 */'
           if marker not in s:
-              css = '''\n<style id="edrad-force-tech-background">\n/* EDRAD FORCE TECH BACKGROUND */\nhtml,body{background:#070708!important}\nbody{position:relative;isolation:isolate}\nbody:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:url("assets/tech-background.svg?v=edrad-tech-2") center top/cover repeat-y!important;opacity:.95!important;filter:saturate(1.05) contrast(1.08)!important;mix-blend-mode:screen!important}\nbody:after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(7,7,8,.08),rgba(7,7,8,.30))!important}\nmain{position:relative;z-index:1!important;background:transparent!important}\n.navbar,footer{position:relative;z-index:20!important}\n.hero,.about,.work,.services,.journey,.contact{background-color:transparent!important}\n.work,.services,.journey{background-image:linear-gradient(rgba(10,10,11,.18),rgba(10,10,11,.18))!important}\n.contact{background-image:linear-gradient(rgba(17,17,19,.42),rgba(17,17,19,.42))!important}\n@media(max-width:700px){body:before{background-size:auto 900px!important;opacity:.82!important}body:after{background:linear-gradient(180deg,rgba(7,7,8,.16),rgba(7,7,8,.42))!important}}\n</style>\n'''
+              css = '''\n<style id="edrad-force-tech-background">\n/* EDRAD FORCE TECH BACKGROUND V3 */\nhtml,body{background:#050506!important}\nbody{position:relative;isolation:isolate}\nbody:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("assets/tech-background.svg?v=edrad-tech-3")!important;background-position:center top!important;background-size:cover!important;background-repeat:repeat-y!important;opacity:.95!important;filter:saturate(1.15) contrast(1.12)!important;mix-blend-mode:screen!important}\nbody:after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(5,5,6,.03),rgba(5,5,6,.20))!important}\nmain{position:relative;z-index:1!important;background:transparent!important}\n.navbar,footer{position:relative;z-index:20!important}\n.hero,.about,.work,.services,.journey,.contact{background-color:transparent!important}\n.work,.services,.journey{background-image:linear-gradient(rgba(10,10,11,.10),rgba(10,10,11,.10))!important}\n.contact{background-image:linear-gradient(rgba(17,17,19,.28),rgba(17,17,19,.28))!important}\n@media(max-width:700px){body:before{background-size:auto 900px!important;opacity:.88!important}body:after{background:linear-gradient(180deg,rgba(5,5,6,.08),rgba(5,5,6,.28))!important}}\n</style>\n'''
               s = s.replace('</head>', css + '</head>', 1)
           p.write_text(s, encoding='utf-8')
           PY
-      - name: Commit
+      - name: Commit and push with retry
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
           git commit -m "Force visible tech background"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          for i in 1 2 3 4 5 6 7 8 9 10; do
+            git fetch origin main
+            git rebase origin/main && git push origin HEAD:main && exit 0
+            git rebase --abort || true
+            git reset --hard origin/main
+            python3 - <<'PY'
+            from pathlib import Path
+            p=Path('index.html')
+            s=p.read_text(encoding='utf-8')
+            if 'EDRAD FORCE TECH BACKGROUND V3' not in s:
+                css='''\n<style id="edrad-force-tech-background">html,body{background:#050506!important}body{position:relative;isolation:isolate}body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("assets/tech-background.svg?v=edrad-tech-3")!important;background-position:center top!important;background-size:cover!important;background-repeat:repeat-y!important;opacity:.95!important;filter:saturate(1.15) contrast(1.12)!important;mix-blend-mode:screen!important}body:after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(180deg,rgba(5,5,6,.03),rgba(5,5,6,.20))!important}main{position:relative;z-index:1!important;background:transparent!important}.navbar,footer{position:relative;z-index:20!important}.hero,.about,.work,.services,.journey,.contact{background-color:transparent!important}.work,.services,.journey{background-image:linear-gradient(rgba(10,10,11,.10),rgba(10,10,11,.10))!important}.contact{background-image:linear-gradient(rgba(17,17,19,.28),rgba(17,17,19,.28))!important}</style>\n'''
+                s=s.replace('</head>',css+'</head>',1)
+                p.write_text(s,encoding='utf-8')
+            PY
+            git add index.html && git commit -m "Force visible tech background" || true
+            sleep 3
+          done
+          exit 1
