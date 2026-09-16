@@ -30,27 +30,27 @@ jobs:
           css_text = css.read_text(encoding='utf-8')
           js_text = js.read_text(encoding='utf-8')
 
-          styles = re.findall(r'<style(?:\\s[^>]*)?>(.*?)</style>', html, flags=re.I | re.S)
-          scripts = re.findall(r'<script(?![^>]*\\bsrc\\s*=)(?:\\s[^>]*)?>(.*?)</script>', html, flags=re.I | re.S)
+          styles = re.findall(r'<style(?:\s[^>]*)?>(.*?)</style>', html, flags=re.I | re.S)
+          scripts = re.findall(r'<script(?![^>]*\bsrc\s*=)(?:\s[^>]*)?>(.*?)</script>', html, flags=re.I | re.S)
 
           if styles:
-              additions = '\\n\\n/* INLINE PORTFOLIO CSS MOVED FROM index.html */\\n' + '\\n\\n'.join(s.strip() for s in styles if s.strip()) + '\\n'
+              additions = '\n\n/* INLINE PORTFOLIO CSS MOVED FROM index.html */\n' + '\n\n'.join(s.strip() for s in styles if s.strip()) + '\n'
               if additions.strip() not in css_text:
                   css_text = css_text.rstrip() + additions
-              html = re.sub(r'<style(?:\\s[^>]*)?>.*?</style>', '', html, flags=re.I | re.S)
+              html = re.sub(r'<style(?:\s[^>]*)?>.*?</style>', '', html, flags=re.I | re.S)
 
           if scripts:
-              additions = '\\n\\n/* INLINE PORTFOLIO JAVASCRIPT MOVED FROM index.html */\\n' + '\\n\\n'.join(s.strip() for s in scripts if s.strip()) + '\\n'
+              additions = '\n\n/* INLINE PORTFOLIO JAVASCRIPT MOVED FROM index.html */\n' + '\n\n'.join(s.strip() for s in scripts if s.strip()) + '\n'
               if additions.strip() not in js_text:
                   js_text = js_text.rstrip() + additions
-              html = re.sub(r'<script(?![^>]*\\bsrc\\s*=)(?:\\s[^>]*)?>.*?</script>', '', html, flags=re.I | re.S)
+              html = re.sub(r'<script(?![^>]*\bsrc\s*=)(?:\s[^>]*)?>.*?</script>', '', html, flags=re.I | re.S)
 
-          if scripts and not re.search(r'<script\\s+[^>]*src=["\'](?:\\./)?js/script\\.js(?:\\?[^"\']*)?["\']', html, flags=re.I):
-              html = re.sub(r'</body>', '  <script src="js/script.js"></script>\\n</body>', html, count=1, flags=re.I)
+          if scripts and not re.search(r'<script\s+[^>]*src=["\'](?:\./)?js/script\.js(?:\?[^"\']*)?["\']', html, flags=re.I):
+              html = re.sub(r'</body>', '  <script src="js/script.js"></script>\n</body>', html, count=1, flags=re.I)
 
           index.write_text(html, encoding='utf-8')
-          css.write_text(css_text + ('\\n' if not css_text.endswith('\\n') else ''), encoding='utf-8')
-          js.write_text(js_text + ('\\n' if not js_text.endswith('\\n') else ''), encoding='utf-8')
+          css.write_text(css_text + ('\n' if not css_text.endswith('\n') else ''), encoding='utf-8')
+          js.write_text(js_text + ('\n' if not js_text.endswith('\n') else ''), encoding='utf-8')
           PY
 
       - name: Verify separation
