@@ -1,36 +1,42 @@
-name: Apply EDRAD Brand Layout Fix
+name: Apply EDRAD Header Brand Fix
 on:
   push:
     branches: [main]
 permissions:
   contents: write
 jobs:
-  fix-edrad-brand:
-    if: github.event.head_commit.message != 'Set full EDRAD brand in top-left header'
+  fix-header-brand:
+    if: github.event.head_commit.message != 'Apply EDRAD header brand layout'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Replace top-left logo with full EDRAD brand lockup
+      - name: Replace top-left header logo with full EDRAD brand lockup
         run: |
           python3 - <<'PY'
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text()
-          old_css = ".brand-lockup{display:inline-flex;align-items:center;gap:0;color:var(--text);text-decoration:none;letter-spacing:-.06em;font-weight:800;line-height:1}.brand-mark{display:grid;place-items:center;width:29px;height:29px;margin-right:2px;background:var(--accent);color:#0a0a0b;font:800 16px/1 Manrope,sans-serif;clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%);position:relative}.brand-mark:after{content:'';position:absolute;right:5px;top:5px;width:7px;height:7px;border:1px solid #0a0a0b;border-radius:50%;opacity:.65}.brand-name{font:800 1.35rem/1 'DM Mono',monospace;letter-spacing:.02em}"
-          new_css = ".brand-lockup{display:inline-flex;align-items:center;gap:10px;color:var(--text);text-decoration:none;letter-spacing:-.02em;font-weight:800;line-height:1}.brand-lockup .brand-mark{display:grid;place-items:center;width:35px;height:35px;margin-right:0;background:var(--accent);color:#0a0a0b;font:800 19px/1 Manrope,sans-serif;clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%);position:relative;flex:0 0 auto}.brand-lockup .brand-mark:after{content:'';position:absolute;right:5px;top:5px;width:7px;height:7px;border:1px solid #0a0a0b;border-radius:50%;opacity:.65}.brand-lockup-copy{display:flex;flex-direction:column;align-items:flex-start;gap:4px}.brand-name{font:800 1.12rem/1 'DM Mono',monospace;letter-spacing:.04em}.brand-tagline{font:7px/1.2 'DM Mono',monospace;letter-spacing:.07em;color:#777;white-space:nowrap}"
-          if old_css in s:
-              s = s.replace(old_css, new_css)
-          old_header = '<a href="#home" class="brand-lockup" aria-label="EDRAD — Engineering Digital Resources, Applications and Development"><span class="brand-mark">E</span><span class="brand-name">DRAD</span></a>'
-          new_header = '<a href="#home" class="brand-lockup" aria-label="EDRAD — Engineering Digital Resources, Applications and Development"><span class="brand-mark">E</span><span class="brand-lockup-copy"><span class="brand-name">DRAD</span><span class="brand-tagline">ENGINEERING DIGITAL RESOURCES, APPLICATIONS &amp; DEVELOPMENT</span></span></a>'
-          s = s.replace(old_header, new_header)
-          s = s.replace('.brand-name{font-size:1.18rem}', '.brand-name{font-size:1.18rem}.brand-tagline{font-size:6px;letter-spacing:.055em}')
+
+          old = '<a href="#home" class="brand-lockup" aria-label="EDRAD — Engineering Digital Resources, Applications and Development"><span class="brand-mark">E</span><span class="brand-name">DRAD</span></a>'
+          new = '''<a href="#home" class="header-brand" aria-label="EDRAD — Engineering Digital Resources, Applications and Development"><span class="header-brand-mark">E</span><span class="header-brand-name">DRAD</span><span class="header-brand-tagline">ENGINEERING DIGITAL RESOURCES, APPLICATIONS &amp; DEVELOPMENT</span></a>'''
+          if old in s:
+              s = s.replace(old, new, 1)
+
+          css = ".header-brand{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:0;color:var(--text);text-decoration:none;line-height:1;width:230px}.header-brand-mark{display:grid;place-items:center;width:31px;height:31px;margin-bottom:3px;background:var(--accent);color:#0a0a0b;font:800 17px/1 Manrope,sans-serif;clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%);position:relative}.header-brand-mark:after{content:'';position:absolute;right:5px;top:5px;width:7px;height:7px;border:1px solid #0a0a0b;border-radius:50%;opacity:.65}.header-brand-name{font:800 1.28rem/1 'DM Mono',monospace;letter-spacing:.03em;color:var(--text)}.header-brand-tagline{display:block;margin-top:4px;font:6px/1.35 'DM Mono',monospace;letter-spacing:.075em;color:#777;white-space:nowrap}.navbar .header-brand:hover .header-brand-name{color:var(--accent)}@media(max-width:900px){.header-brand{width:200px}.header-brand-tagline{font-size:5.5px}}@media(max-width:600px){.header-brand{width:150px}.header-brand-mark{width:27px;height:27px;font-size:15px}.header-brand-name{font-size:1.08rem}.header-brand-tagline{font-size:4.8px;letter-spacing:.055em;white-space:normal;max-width:150px}.navbar{padding:0 5vw}}"
+          marker = '.brand-lockup{display:inline-flex;'
+          if '.header-brand{' not in s:
+              s = s.replace('<style>', '<style>\n    ' + css, 1)
+          else:
+              import re
+              s = re.sub(r'\\.header-brand\\{.*?\\}@media\\(max-width:600px\\)\\{.*?\\}', css, s, count=1)
+
           p.write_text(s)
           PY
-      - name: Commit change
+      - name: Commit header brand change
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
           git diff --cached --quiet && exit 0
-          git commit -m 'Set full EDRAD brand in top-left header'
+          git commit -m 'Apply EDRAD header brand layout'
           git push
