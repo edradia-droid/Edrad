@@ -6,37 +6,47 @@ permissions:
   contents: write
 jobs:
   fix-header-brand:
-    if: github.event.head_commit.message != 'Apply EDRAD header brand layout'
+    if: github.event.head_commit.message != 'Move EDRAD hero brand to top header'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Replace top-left header logo with full EDRAD brand lockup
+      - name: Move hero EDRAD brand into the top header
         run: |
           python3 - <<'PY'
           from pathlib import Path
           p = Path('index.html')
           s = p.read_text()
 
-          old = '<a href="#home" class="brand-lockup" aria-label="EDRAD — Engineering Digital Resources, Applications and Development"><span class="brand-mark">E</span><span class="brand-name">DRAD</span></a>'
-          new = '''<a href="#home" class="header-brand" aria-label="EDRAD — Engineering Digital Resources, Applications and Development"><span class="header-brand-mark">E</span><span class="header-brand-name">DRAD</span><span class="header-brand-tagline">ENGINEERING DIGITAL RESOURCES, APPLICATIONS &amp; DEVELOPMENT</span></a>'''
-          if old in s:
-              s = s.replace(old, new, 1)
+          old_header = '<a href="#home" class="header-brand" aria-label="EDRAD — Engineering Digital Resources, Applications and Development"><span class="header-brand-mark">E</span><span class="header-brand-name">DRAD</span><span class="header-brand-tagline">ENGINEERING DIGITAL RESOURCES, APPLICATIONS &amp; DEVELOPMENT</span></a>'
+          new_header = '<a href="#home" class="edrad-hero-brand header-brand-hero" aria-label="EDRAD — Engineering Digital Resources, Applications and Development"><span class="brand-mark">E</span><div><strong>DRAD</strong><small>ENGINEERING DIGITAL RESOURCES, APPLICATIONS &amp; DEVELOPMENT</small></div></a>'
+          if old_header in s:
+              s = s.replace(old_header, new_header, 1)
 
-          css = ".header-brand{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:0;color:var(--text);text-decoration:none;line-height:1;width:230px}.header-brand-mark{display:grid;place-items:center;width:31px;height:31px;margin-bottom:3px;background:var(--accent);color:#0a0a0b;font:800 17px/1 Manrope,sans-serif;clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%);position:relative}.header-brand-mark:after{content:'';position:absolute;right:5px;top:5px;width:7px;height:7px;border:1px solid #0a0a0b;border-radius:50%;opacity:.65}.header-brand-name{font:800 1.28rem/1 'DM Mono',monospace;letter-spacing:.03em;color:var(--text)}.header-brand-tagline{display:block;margin-top:4px;font:6px/1.35 'DM Mono',monospace;letter-spacing:.075em;color:#777;white-space:nowrap}.navbar .header-brand:hover .header-brand-name{color:var(--accent)}@media(max-width:900px){.header-brand{width:200px}.header-brand-tagline{font-size:5.5px}}@media(max-width:600px){.header-brand{width:150px}.header-brand-mark{width:27px;height:27px;font-size:15px}.header-brand-name{font-size:1.08rem}.header-brand-tagline{font-size:4.8px;letter-spacing:.055em;white-space:normal;max-width:150px}.navbar{padding:0 5vw}}"
-          marker = '.brand-lockup{display:inline-flex;'
-          if '.header-brand{' not in s:
-              s = s.replace('<style>', '<style>\n    ' + css, 1)
-          else:
-              import re
-              s = re.sub(r'\\.header-brand\\{.*?\\}@media\\(max-width:600px\\)\\{.*?\\}', css, s, count=1)
+          old_hero = '<div class="edrad-hero-brand"><span class="brand-mark">E</span><div><strong>DRAD</strong><small>ENGINEERING DIGITAL RESOURCES, APPLICATIONS & DEVELOPMENT</small></div></div>'
+          if old_hero in s:
+              s = s.replace(old_hero, '', 1)
 
+          import re
+          s = re.sub(r'\\.header-brand\\{.*?\\}@media\\(max-width:600px\\)\\{.*?\\}', '', s, count=1)
+
+          css = '''
+          .navbar .header-brand-hero{display:inline-flex;align-items:center;gap:14px;margin:0;padding:12px 18px 12px 12px;width:auto;min-width:300px;border:1px solid rgba(217,255,87,.28);background:rgba(217,255,87,.055);box-shadow:0 0 35px rgba(217,255,87,.07),inset 0 0 28px rgba(217,255,87,.035);backdrop-filter:blur(14px);color:var(--text);text-decoration:none;transition:border-color .3s ease,box-shadow .3s ease,transform .3s ease}
+          .navbar .header-brand-hero:hover{border-color:rgba(217,255,87,.5);box-shadow:0 0 45px rgba(217,255,87,.12),inset 0 0 30px rgba(217,255,87,.045);transform:translateY(-1px)}
+          .navbar .header-brand-hero .brand-mark{width:42px;height:42px;margin-right:0;font-size:22px;flex:0 0 42px}
+          .navbar .header-brand-hero strong{display:block;font:800 1.5rem/1 'DM Mono',monospace;letter-spacing:.045em;color:var(--text)}
+          .navbar .header-brand-hero small{display:block;margin-top:5px;font:7.5px/1.35 'DM Mono',monospace;letter-spacing:.085em;color:#9a9a9e;white-space:nowrap}
+          @media(max-width:1100px){.navbar .header-brand-hero{min-width:260px;padding-right:13px}.navbar .header-brand-hero strong{font-size:1.3rem}.navbar .header-brand-hero small{font-size:6.5px}}
+          @media(max-width:900px){.navbar .header-brand-hero{min-width:230px;gap:10px;padding:9px 11px 9px 9px}.navbar .header-brand-hero .brand-mark{width:34px;height:34px;flex-basis:34px;font-size:18px}.navbar .header-brand-hero strong{font-size:1.15rem}.navbar .header-brand-hero small{font-size:5.8px;letter-spacing:.065em}}
+          @media(max-width:600px){.navbar .header-brand-hero{min-width:0;width:155px;gap:8px;padding:7px 8px 7px 7px}.navbar .header-brand-hero .brand-mark{width:29px;height:29px;flex-basis:29px;font-size:15px}.navbar .header-brand-hero strong{font-size:1rem}.navbar .header-brand-hero small{font-size:4.4px;letter-spacing:.045em;white-space:normal;max-width:105px}.navbar{padding:0 5vw}}
+          '''
+          s = s.replace('<style>', '<style>\n' + css, 1)
           p.write_text(s)
           PY
-      - name: Commit header brand change
+      - name: Commit EDRAD brand repositioning
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
           git diff --cached --quiet && exit 0
-          git commit -m 'Apply EDRAD header brand layout'
+          git commit -m 'Move EDRAD hero brand to top header'
           git push
