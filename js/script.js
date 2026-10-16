@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     nav.classList.remove('open');
     nav.removeAttribute('style');
     menu.setAttribute('aria-expanded','false');
+    menu.setAttribute('aria-label','Open menu');
   };
 
   const openMenu=()=>{
@@ -88,6 +89,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     nav.style.webkitBackdropFilter='blur(16px)';
     nav.style.zIndex='999';
     menu.setAttribute('aria-expanded','true');
+    menu.setAttribute('aria-label','Close menu');
   };
 
   menu.addEventListener('click',e=>{
@@ -96,6 +98,20 @@ document.addEventListener('DOMContentLoaded',()=>{
   });
 
   nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
+
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'&&nav.classList.contains('open')){
+      closeMenu();
+      menu.focus();
+    }
+  });
+
+  document.addEventListener('click',e=>{
+    if(nav.classList.contains('open')&&!nav.contains(e.target)&&!menu.contains(e.target)){
+      closeMenu();
+    }
+  });
+
   window.addEventListener('resize',()=>{
     if(window.innerWidth>850)closeMenu();
     compactContact();
