@@ -7,6 +7,15 @@
 footer a[href="#home"]{display:none!important}
 
 
+/* Mobile visibility safeguard: the Selected Work section must not depend on scroll-reveal JS. */
+@media(max-width:850px){
+  #work.reveal{
+    opacity:1!important;
+    transform:none!important;
+    visibility:visible!important;
+  }
+}
+
 /* Mobile navigation: accessible slide-in sidebar with distinct, tappable links. */
 @media(max-width:850px){
   .navbar{position:fixed!important;top:0;left:0;right:0;width:100%;z-index:1200!important}
