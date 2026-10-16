@@ -97,7 +97,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     nav.classList.contains('open')?closeMenu():openMenu();
   });
 
-  nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
+  nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
+    /* Let the browser process the anchor/hash jump before hiding the mobile menu. */
+    window.setTimeout(closeMenu,180);
+  }));
 
   document.addEventListener('keydown',e=>{
     if(e.key==='Escape'&&nav.classList.contains('open')){
@@ -110,7 +113,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(nav.classList.contains('open')&&!nav.contains(e.target)&&!menu.contains(e.target)){
       closeMenu();
     }
-  });
+  },true);
 
   window.addEventListener('resize',()=>{
     if(window.innerWidth>850)closeMenu();
