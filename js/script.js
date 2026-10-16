@@ -68,38 +68,36 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   const closeMenu=()=>{
     nav.classList.remove('open');
-    nav.removeAttribute('style');
+    document.body.classList.remove('mobile-nav-open');
     menu.setAttribute('aria-expanded','false');
-    menu.setAttribute('aria-label','Open menu');
+    menu.setAttribute('aria-label','Open navigation');
   };
 
   const openMenu=()=>{
     nav.classList.add('open');
-    nav.style.display='flex';
-    nav.style.position='absolute';
-    nav.style.top='82px';
-    nav.style.left='0';
-    nav.style.right='0';
-    nav.style.flexDirection='column';
-    nav.style.gap='0';
-    nav.style.padding='10px 6vw 18px';
-    nav.style.background='rgba(10,10,11,.97)';
-    nav.style.borderBottom='1px solid rgba(255,255,255,.08)';
-    nav.style.backdropFilter='blur(16px)';
-    nav.style.webkitBackdropFilter='blur(16px)';
-    nav.style.zIndex='999';
+    document.body.classList.add('mobile-nav-open');
     menu.setAttribute('aria-expanded','true');
-    menu.setAttribute('aria-label','Close menu');
+    menu.setAttribute('aria-label','Close navigation');
   };
 
   menu.addEventListener('click',e=>{
     e.preventDefault();
+    e.stopPropagation();
     nav.classList.contains('open')?closeMenu():openMenu();
   });
 
-  nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
-    /* Let the browser process the anchor/hash jump before hiding the mobile menu. */
-    window.setTimeout(closeMenu,180);
+  /* Navigate explicitly on tap so mobile browsers cannot lose the anchor click
+     when the animated sidebar closes. */
+  nav.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',e=>{
+    const hash=link.getAttribute('href');
+    const target=hash&&document.getElementById(hash.slice(1));
+    if(!target)return;
+    e.preventDefault();
+    nav.querySelectorAll('a').forEach(item=>item.classList.remove('active'));
+    link.classList.add('active');
+    closeMenu();
+    if(window.location.hash!==hash)history.pushState(null,'',hash);
+    window.setTimeout(()=>target.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}),40);
   }));
 
   document.addEventListener('keydown',e=>{
