@@ -5,3 +5,12 @@
 @media(max-width:600px){.contact-brand-bottom strong{display:inline-flex!important;align-items:center!important;gap:0!important;font-size:0!important;line-height:1!important;color:transparent!important}.contact-brand-bottom strong:before{content:'E';display:grid!important;place-items:center!important;width:29px!important;height:29px!important;flex:0 0 29px!important;margin-right:2px!important;background:radial-gradient(circle at calc(100% - 5px) 5px,transparent 0 3px,#0a0a0b 3px 4px,transparent 4px),var(--accent)!important;color:#0a0a0b!important;font:800 15px/1 Manrope,sans-serif!important;clip-path:polygon(0 0,100% 0,100% 72%,72% 100%,0 100%)!important;position:relative!important}.contact-brand-bottom strong:after{content:'DRAD';display:inline-block!important;color:var(--text)!important;font:800 1rem/1 'DM Mono',monospace!important;letter-spacing:.04em!important}.contact-brand-bottom small{display:block!important;margin-top:4px!important;font:4.4px/1.4 'DM Mono',monospace!important;letter-spacing:.045em!important;color:#777!important;white-space:normal!important;max-width:105px!important}}
 #contact a[href="#home"]{display:none!important}
 footer a[href="#home"]{display:none!important}
+
+
+/* MOBILE NAV FIX: keep the header/menu above page content and ensure links receive taps. */
+@media(max-width:850px){
+  .navbar{position:fixed!important;top:0;left:0;right:0;z-index:1000!important}
+  #nav-menu{z-index:1001!important;pointer-events:auto!important;touch-action:manipulation}
+  #nav-menu a{position:relative;z-index:1002;display:block;width:100%;padding:14px 0;pointer-events:auto!important;touch-action:manipulation}
+  #menu-btn{position:relative;z-index:1003;pointer-events:auto;touch-action:manipulation}
+}
